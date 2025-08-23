@@ -1,0 +1,201 @@
+/* -- Global rules -- */
+window#waybar {
+    transition: opacity 0.7s ease-in-out;
+    opacity: 1;
+}
+
+window#waybar.hidden {
+    opacity: 0;
+}
+
+* {
+  border: none;
+  font-family: "JetbrainsMono Nerd Font";
+  font-size: 15px;
+  min-height: 10px;
+}
+
+window#waybar {
+  background: rgba(0, 25, 30, 0);
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+/* - General rules for visible modules -- */
+#custom-archicon,
+#clock,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#idle_inhibitor,
+#pulseaudio,
+#pulseaudio_slider,
+#network,
+#language {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+  transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+/* Separation to the left */
+#custom-archicon,
+#cpu,
+#idle_inhibitor {
+  margin-left: 5px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+/* Separation to the right */
+#clock,
+#temperature,
+#language {
+  margin-right: 5px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+/* -- Specific styles with turquoise-to-blue gradient -- */
+#custom-archicon {
+  font-size: 20px;
+  color: #004d61;
+  background: linear-gradient(135deg, #5BE7C4, #A2D2FF);
+  padding-right: 17px;
+}
+#custom-archicon:hover {
+  background: linear-gradient(135deg, #7DF1D2, #C0E0FF);
+}
+
+#clock {
+  background: linear-gradient(135deg, #A2D2FF, #B5E8E0);
+}
+#clock:hover {
+  background: linear-gradient(135deg, #C0E0FF, #D0F0FF);
+}
+
+#cpu {
+  background: linear-gradient(135deg, #5BE7C4, #89CFF0);
+}
+#cpu:hover {
+  background: linear-gradient(135deg, #7DF1D2, #AEE3FF);
+}
+
+#memory {
+  background: linear-gradient(135deg, #A2D2FF, #89CFF0);
+}
+#memory:hover {
+  background: linear-gradient(135deg, #C0E0FF, #AEE3FF);
+}
+
+#disk {
+  background: linear-gradient(135deg, #B5E8E0, #A2D2FF);
+}
+#disk:hover {
+  background: linear-gradient(135deg, #D0F0FF, #C0E0FF);
+}
+
+#temperature {
+  background: linear-gradient(135deg, #89CFF0, #A2D2FF);
+}
+temperature:hover {
+  background: linear-gradient(135deg, #AEE3FF, #C0E0FF);
+}
+
+/* Modules center */
+#workspaces {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  margin: 6px 5px;
+  padding: 0px 6px;
+}
+
+#workspaces button {
+  color: #017189;
+  background: transparent;
+  padding: 4px 4px;
+  transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
+}
+
+#workspaces button.occupied {
+  color: #006d77;
+}
+
+#workspaces button.active {
+  color: #004d61;
+  text-shadow: 0 0 4px #5BE7C4;
+}
+
+#workspaces button:hover {
+  color: #0077b6;
+}
+
+/* Modules right */
+#taskbar {
+  background: transparent;
+  border-radius: 10px;
+  padding: 0px 5px;
+  margin: 6px 5px;
+}
+
+#taskbar button {
+  padding: 0px 5px;
+  margin: 0px 3px;
+  border-radius: 6px;
+  transition: background 0.4s ease;
+}
+
+#taskbar button.active,
+#taskbar button:hover {
+  background: rgba(162, 210, 255, 0.4);
+}
+
+#idle_inhibitor {
+  background: linear-gradient(135deg, #5BE7C4, #A2D2FF);
+  padding-right: 15px;
+}
+#idle_inhibitor:hover {
+  background: linear-gradient(135deg, #7DF1D2, #C0E0FF);
+}
+
+#pulseaudio {
+  background: linear-gradient(135deg, #B5E8E0, #A2D2FF);
+}
+#pulseaudio:hover {
+  background: linear-gradient(135deg, #D0F0FF, #C0E0FF);
+}
+
+#pulseaudio_slider {
+  background: linear-gradient(135deg, #A2D2FF, #B5E8E0);
+}
+#pulseaudio_slider:hover {
+  background: linear-gradient(135deg, #C0E0FF, #D0F0FF);
+}
+
+#network {
+  background: linear-gradient(135deg, #89CFF0, #B5E8E0);
+  padding-right: 13px;
+}
+#network:hover {
+  background: linear-gradient(135deg, #AEE3FF, #D0F0FF);
+}
+
+#language {
+  background: linear-gradient(135deg, #A2D2FF, #5BE7C4);
+  padding-right: 15px;
+}
+#language:hover {
+  background: linear-gradient(135deg, #C0E0FF, #7DF1D2);
+}
+
+/* === Optional animation === */
+@keyframes blink {
+  to {
+    background: linear-gradient(135deg, #5BE7C4, #A2D2FF);
+    color: #004d61;
+  }
+}
