@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+CFG="$HOME/.config/waybar/config"
+[ -f "$HOME/.config/waybar/config.jsonc" ] && CFG="$HOME/.config/waybar/config.jsonc"
+
+BASE="$HOME/.config/waybar/style.css"
+TMP="$HOME/.config/waybar/.style_runtime.css"
+DUR=0.5
+
+running() { pgrep -x waybar >/dev/null; }
+
+start_bar() {
+  # стилі з fade-IN на старті (анімація програється автоматично)
+  cat "$BASE" > "$TMP"
+  cat >> "$TMP" <<EOF
+window#waybar { opacity: 0; }
+@keyframes wb_fade_in { from { opacity: 0; } to { opacity: 1; } }
+window#waybar { animation: wb_fade_in ${DUR}s ease-in-out forwards; }
+EOF
+  waybar --config "$CFG" --style "$TMP" >/dev/null 2>&1 &
+}
+
+fadeout_and_kill() {
+  # підсовуємо fade-OUT, просимо Waybar перезавантажити стилі, чекаємо і завершуємо
+  cat "$BASE" > "$TMP"
+  cat >> "$TMP" <<EOF
+window#waybar { opacity: 1; }
+@keyframes wb_fade_out { from { opacity: 1; } to { opacity: 0; } }
+window#waybar { animation: wb_fade_out ${DUR}s ease-in-out forwards; }
+EOF
+  pkill -USR1 -x waybar 2>/dev/null || true
+  pkill -USR2 -x waybar 2>/dev/null || true
+  sleep "$DUR"
+  pkill -x waybar || true
+  rm -f "$TMP"
+}
+
+if running; then
+  fadeout_and_kill
+else
+  start_bar
+fi
